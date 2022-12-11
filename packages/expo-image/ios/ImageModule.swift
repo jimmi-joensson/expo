@@ -66,12 +66,15 @@ public final class ImageModule: Module {
       }
     }
 
-    Function("clearMemoryCache") {
+    AsyncFunction("clearMemoryCache") {
       SDImageCache.shared.clearMemory()
+      return true
     }
 
-    Function("clearDiskCache") {
-      SDImageCache.shared.clearDisk()
+    AsyncFunction("clearDiskCache") { (promise: Promise) in
+      SDImageCache.shared.clearDisk {
+        promise.resolve(true)
+      }
     }
   }
 
