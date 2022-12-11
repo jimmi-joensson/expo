@@ -35,6 +35,14 @@ export class Image extends React.Component<ImageProps> {
     return await ExpoImageModule.clearDiskCache();
   }
 
+  /**
+   * Asynchronously calculates the disk cache total size and file count.
+   * @platform ios
+   */
+  static async calculateDiskCacheSize(): Promise<{ fileCount: number; totalSize: number }> {
+    return await ExpoImageModule.calculateDiskCacheSize();
+  }
+
   render() {
     const { style, resizeMode: resizeModeProp, ...restProps } = this.props;
 

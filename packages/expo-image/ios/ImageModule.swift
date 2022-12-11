@@ -76,6 +76,15 @@ public final class ImageModule: Module {
         promise.resolve(true)
       }
     }
+
+    AsyncFunction("calculateDiskCacheSize") { (promise: Promise) in
+      SDImageCache.shared.calculateSize { fileCount, totalSize in
+        promise.resolve([
+          "fileCount": fileCount,
+          "totalSize": totalSize
+        ])
+      }
+    }
   }
 
   static func registerCoders() {
